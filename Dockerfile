@@ -1,16 +1,15 @@
-FROM ubuntu:14.04
+FROM mhart/alpine-node:4.4
 
-MAINTAINER Christoph Wiechert <wio@psitrax.de>
-MAINTAINER https://github.com/henszey
+# Create app directory
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
 
-RUN apt-get update
-ENV DEBIAN_FRONTEND noninteractive
-RUN apt-get install -y nodejs
+# Install app dependencies
+COPY package.json /usr/src/app/
+RUN npm install
 
-RUN mkdir /app
-ADD . /app/
+# Bundle app source
+COPY . /usr/src/app
 
-WORKDIR /app
 EXPOSE 8000
-
-CMD ["nodejs", "server.js"]
+CMD [ "node", "server.js" ]

@@ -1,0 +1,22 @@
+version: '2'
+services:
+  etcd:
+    image: quay.io/coreos/etcd
+    container_name: etcd
+    command: /usr/local/bin/etcd -name etcd0 -advertise-client-urls http://0.0.0.0:2379,http://0.0.0.0:4001 -listen-client-urls http://0.0.0.0:2379,http://0.0.0.0:4001 -initial-advertise-peer-urls http://0.0.0.0:2380 -listen-peer-urls http://0.0.0.0:2380 -initial-cluster-token etcd-cluster-1 -initial-cluster etcd0=http://0.0.0.0:2380 -initial-cluster-state new
+    ports:
+      - "2379:2379"
+      - "2380:2380"
+      - "4001:4001"
+
+  etcd-browser:
+    build: ./
+    container_name: etcd-browser
+    environment:
+      - ETCD_HOST=etcd
+      - ETCD_PORT=4001
+      - AUTH_PASS=doe
+    ports:
+      - "8000:8000"
+    links:
+      - etcd

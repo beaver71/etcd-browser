@@ -1,0 +1,16 @@
+{
+  "name": "etcd-browser",
+  "version": "0.0.1",
+  "description": "",
+  "main": "server.js",
+  "author": "",
+  "license": "",
+  "engines": {
+    "node": "4.4.0"
+  },
+  "dependencies": {
+    "fs": "0.0.0",
+    "http": "0.0.0",
+    "https": "^1.0.0"
+  }
+}
