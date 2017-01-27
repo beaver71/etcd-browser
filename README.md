@@ -7,16 +7,15 @@
 ## Screen Shot
 ![etcd-browser Screen Shot](http://henszey.github.io/etcd-browser/images/etcdbrowser.png)
 
-## TODO
-* Implement missing features (TTL)
+## To build/run as a Docker container together with ETCD:
 
-## To build/run as a Docker container:
+1. build etcd-browser image:
 
-(adjust options as necessary - to run it as a daemon, remove "--rm", "-t", "-i" and add "-D")
-
-    cd <repository>
-    sudo docker build -t etcd-browser .
-    sudo docker run --rm --name etcd-browser -p 0.0.0.0:8000:8000 --env ETCD_HOST=10.10.0.1 --env AUTH_PASS=doe -t -i etcd-browser
+    docker-compose build
+	
+2. run etcd container (from quay.io/coreos/etcd image) and etcd-browser container (image built previously):
+	
+    docker-compose up -d
 
 ### Configuration
 You can configure the builtin server using environment variables:
